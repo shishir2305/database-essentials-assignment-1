@@ -1,0 +1,35 @@
+
+users {
+	id int pk
+	name varchar
+	email varchar
+	phone varchar
+	createdAt timestamp
+}
+
+follows {
+	id int pk
+	userId int > users.id
+	followingId int *> users.id
+}
+
+tweets {
+	id int pk
+	contents varchar
+	userId int *> users.id
+	parentId int def(null)
+	createdAt timestamp
+}
+
+retweets {
+	id int pk
+	userId int *> users.id
+	tweetId int *> tweets.id
+}
+
+likes {
+	id int pk
+	userId int > users.id
+	tweetId int *> tweets.id
+}
+
